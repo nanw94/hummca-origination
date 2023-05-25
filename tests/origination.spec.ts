@@ -6,8 +6,8 @@ let redirectLink;
 
 //Auth0 
 //Need to make sure the number is unique in Auth0, unique email address is recommended too.
-const PhoneNumber = '8036190424';
-const EmailAddress = 'nathanhummca01';
+const PhoneNumber = '8157809623';
+const EmailAddress = 'nathanhummca03';
 const Password = 'Password1';
 
 //Email service (mailinator.com)
@@ -79,7 +79,7 @@ test('Origination via Humm Canada web application',async ({ page }) => {
   await test.step('input Email address',async () => {
     await page.getByPlaceholder('Email').fill(`${EmailAddress}@${Mail.domain}`);
     await page.getByRole('button', { name: 'Confirm' }).click();
-    await expect(page.getByText(`We\'ve sent a verification email to ${EmailAddress}@${Mail.domain}.Please click on`)).toBeVisible( { timeout: 30000 });
+    await expect(page.getByText(`We\'ve sent a verification email to ${EmailAddress}@${Mail.domain}.Please click on`)).toBeVisible( { timeout: 40000 });
   })
 
   await test.step('sign in to mailinator', async () => {
