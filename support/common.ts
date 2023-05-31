@@ -30,7 +30,7 @@ export async function getPurchaseLink(phoneNumber) {
   const urlRegex = /(https?:\/\/[^\s]+)/;
   const link = await data.messages[0].body.match(urlRegex);
 
-  return link;
+  return link[0];
 }
 
 //Fetch inbox for the id of the latest mail

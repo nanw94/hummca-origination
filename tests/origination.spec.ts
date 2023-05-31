@@ -7,7 +7,7 @@ let redirectLink;
 //Auth0 
 //Need to make sure the number is unique in Auth0, unique email address is recommended too.
 const PhoneNumber = '8157809623';
-const EmailAddress = 'nathanhummca03';
+const EmailAddress = 'nathanhummca04';
 const Password = 'Password1';
 
 //Email service (mailinator.com)
