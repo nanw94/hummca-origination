@@ -1,13 +1,14 @@
 import { test, expect } from '@playwright/test';
 import * as common from '../support/common';
+import ENV from '../utils/env'
 
 let otp;
 let redirectLink;
 
 //Auth0 
 //Need to make sure the number is unique in Auth0, unique email address is recommended too.
-const PhoneNumber = '8157809623';
-const EmailAddress = 'nathanhummca04';
+const PhoneNumber = '9842076461';
+const EmailAddress = 'nathanhummca09';
 const Password = 'Password1';
 
 //Email service (mailinator.com)
@@ -27,7 +28,7 @@ const Person = {
   dob:'05/26/1980'
 }
 
-const funding = 
+const Funding = 
 {
   holder:'Test Test',
   cvv: '123' ,
@@ -37,7 +38,7 @@ const funding =
 
 test('Origination via Humm Canada web application',async ({ page }) => {
   await test.step('go to humm-ca web app',async () => {
-    await page.goto('/sign-in-or-register');
+    await page.goto(ENV.CUSTOMER_URL + '/sign-in-or-register');
     await expect(page.getByText('Choose below whether you want to login in or create an account')).toBeVisible( { timeout: 10000 });
   });
   
@@ -102,9 +103,6 @@ test('Origination via Humm Canada web application',async ({ page }) => {
     
   await test.step('go to the redirect link', async () => {
     await page.goto(redirectLink);
-    // await page.getByPlaceholder('Email or Mobile').fill(PhoneNumber);
-    // await page.getByPlaceholder('Password').fill(Password);
-    // await page.getByRole('button', { name: 'Log In' }).click();
   })
 
   await test.step('fill up personal information', async () => {
@@ -120,10 +118,10 @@ test('Origination via Humm Canada web application',async ({ page }) => {
   await test.step('add funding source', async () => {
     await page.locator('#card').check();
     await page.getByRole('button', { name: 'Confirm' }).click();
-    await page.getByPlaceholder('Cardholder Name').fill(funding.holder);
-    await page.frameLocator('iframe[name^="__privateStripeFrame"]').first().getByPlaceholder('Credit Card Number').fill(funding.creditcard);
-    await page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1).getByPlaceholder('MM/YY').fill(funding.expire);
-    await page.frameLocator('iframe[name^="__privateStripeFrame"]').last().getByPlaceholder('CVV').fill(funding.cvv);
+    await page.getByPlaceholder('Cardholder Name').fill(Funding.holder);
+    await page.frameLocator('iframe[name^="__privateStripeFrame"]').first().getByPlaceholder('Credit Card Number').fill(Funding.creditcard);
+    await page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1).getByPlaceholder('MM/YY').fill(Funding.expire);
+    await page.frameLocator('iframe[name^="__privateStripeFrame"]').last().getByPlaceholder('CVV').fill(Funding.cvv);
     await page.getByRole('button', { name: 'Continue' }).click();
   })
 

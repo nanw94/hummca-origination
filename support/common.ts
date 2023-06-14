@@ -1,13 +1,20 @@
 import { expect } from '@playwright/test';
+import ENV from '../utils/env';
 
+// SIT
 const twilioURL = 'https://api.twilio.com/2010-04-01/Accounts/AC5686ad7a2cd95c6a8541f7afa1567f90';
 const twilioToken = 'U0s2YTRiNmFiOTE3MTJhNWU2ZjM2NTIzMDcxN2E1Y2ZlYTpsenZBaWJXTTJyNkpZUWQ2c1dTSkE3VGc5dTl2RXVScw=='
+
+//UAT 
+// const twilioURL = 'https://api.twilio.com/2010-04-01/Accounts/AC8682510996ebe2a93cf82e02b12c901b';
+// const twilioToken = 'U0tiZDdhYzg1N2NiZTVkZGFlYmYwNzU1NGY2ZGIxOWZjZjpIRnk3TFM4dkcxQWJCT1gzZWVSWVBrMGZvTUxKdFRzcA==';
+
 //get otp
 export async function getOTP(phoneNumber) {
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Basic ${twilioToken}`);
+    myHeaders.append("Authorization", `Basic ${ENV.TWILIO_TOKEN}`);
            
-    const response = await fetch(`${twilioURL}/Messages.json?To=+1${phoneNumber}&PageSize=1`, {
+    const response = await fetch(`${ENV.TWILIO_URL}/Messages.json?To=+1${phoneNumber}&PageSize=1`, {
       method: 'GET',
       headers: myHeaders,
     });
@@ -19,9 +26,12 @@ export async function getOTP(phoneNumber) {
 
 export async function getPurchaseLink(phoneNumber) {
   var myHeaders = new Headers();
-  myHeaders.append("Authorization", `Basic ${twilioToken}`);
+
+  // myHeaders.append("Authorization", `Basic ${ENV.TWILIO_TOKEN}`);
+  myHeaders.append("Authorization", `Basic U0s2YTRiNmFiOTE3MTJhNWU2ZjM2NTIzMDcxN2E1Y2ZlYTpsenZBaWJXTTJyNkpZUWQ2c1dTSkE3VGc5dTl2RXVScw==`);         
          
-  const response = await fetch(`${twilioURL}/Messages.json?To=+1${phoneNumber}&PageSize=1`, {
+  // const response = await fetch(`${ENV.TWILIO_URL}/Messages.json?To=+1${phoneNumber}&PageSize=1`, {
+  const response = await fetch(`https://api.twilio.com/2010-04-01/Accounts/AC5686ad7a2cd95c6a8541f7afa1567f90/Messages.json?To=+1${phoneNumber}&PageSize=1`, {
     method: 'GET',
     headers: myHeaders,
   });
