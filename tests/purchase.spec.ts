@@ -14,7 +14,7 @@ const Customer = {
 }
 
 const Purchase = {
-    price: '1452',
+    price: '256',
     description:'automated purchse',
     referenceNumber:'automated purchase',
 }
@@ -25,6 +25,7 @@ test('make a purchase and get to the confirm page', async ({ page }) => {
     await page.getByPlaceholder('Password').fill(Retailer.password);
     await page.getByRole('button', { name: 'Log in' }).click();
     await page.getByRole('link', { name: 'Make a Purchase' }).click();
+    await expect(page.getByText('Enter Customer mobile number')).toBeVisible({ timeout: 10000 })
     await page.getByPlaceholder('000 000 0000').fill(Customer.phone);
     await page.getByLabel('*Description of purchase').fill(Purchase.description);
     await page.getByLabel('*Invoice Reference Number').fill(Purchase.referenceNumber);
